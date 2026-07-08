@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cacao Támesis | Origen Premium Artesanal</title>
+    <!-- Google Fonts: Elegancia Editorial -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- PALETA DE COLORES BOUTIQUE --- */
+        :root {
+            --color-crema: #faf6f0;      /* Fondo suave, orgánico y sofisticado */
+            --color-blanco: #ffffff;
+            --color-cacao: #2b1a11;       /* Café profundo aterciopelado */
+            --color-verde: #1c3322;       /* Verde bosque elegante (Naturaleza de Támesis) */
+            --color-verde-suave: #e8eee9; /* Fondo sutil para contrastes naturales */
+            --color-oro-viejo: #b89765;   /* Acento premium sutil */
+            --texto-cuerpo: #4a4540;
+            
+            --font-editorial: 'Cormorant Garamond', serif;
+            --font-inter: 'Inter', sans-serif;
+            --shadow-sutil: 0 20px 40px rgba(43, 26, 17, 0.04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-inter);
+            background-color: var(--color-crema);
+            color: var(--texto-cuerpo);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* --- NAVEGACIÓN MINIMALISTA --- */
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 32px 0;
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-family: var(--font-editorial);
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--color-cacao);
+            text-decoration: none;
+        }
+
+        .brand span {
+            color: var(--color-oro-viejo);
+            font-style: italic;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--color-cacao);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-oro-viejo);
+        }
+
+        /* --- HERO: CONFIGURADO PARA TU NUEVA IMAGEN --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+            background: linear-gradient(to right, var(--color-crema) 55%, var(--color-verde-suave) 45%);
+            position: relative;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+            align-items: center;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .hero-grid {
+                grid-template-columns: 1.1fr 0.9fr;
+            }
+        }
+
+        .hero-content {
+            max-width: 560px;
+        }
+
+        .pre-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--color-oro-viejo);
+            font-weight: 600;
+            margin-bottom: 24px;
+            display: block;
+        }
+
+        .hero h1 {
+            font-family: var(--font-editorial);
+            font-size: 4rem;
+            line-height: 1.1;
+            color: var(--color-cacao);
+            font-weight: 400;
+            margin-bottom: 28px;
+        }
+
+        .hero h1 em {
+            font-family: var(--font-editorial);
+            font-style: italic;
+            color: var(--color-verde);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--texto-cuerpo);
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        /* Botón de Alta Gama */
+        .btn-gourmet {
+            display: inline-block;
+            background-color: var(--color-cacao);
+            color: var(--color-crema);
+            padding: 18px 44px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 0px;
+            box-shadow: 0 10px 30px rgba(43, 26, 17, 0.15);
+            transition: all 0.4s ease;
+            border: 1px solid var(--color-cacao);
+        }
+
+        .btn-gourmet:hover {
+            background-color: transparent;
+            color: var(--color-cacao);
+            transform: translateY(-3px);
+        }
+
+        /* Contenedor optimizado para resaltar tu foto sin recortarla toscamente */
+        .hero-image-wrapper {
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-img {
+            width: 100%;
+            max-width: 480px;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 30px 60px rgba(43, 26, 17, 0.1);
+            background-color: var(--color-blanco); /* Protege el fondo blanco de tu ilustración */
+            transition: transform 0.4s ease;
+        }
+
+        .hero-img:hover {
+            transform: scale(1.02);
+        }
+
+        /* --- SECCIÓN HISTORIA: ROMANCE POR EL ORIGEN --- */
+        .experience {
+            padding: 140px 0;
+            background-color: var(--color-blanco);
+        }
+
+        .editorial-block {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .img-collage {
+            position: relative;
+            height: 550px;
+        }
+
+        .img-collage img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .story-text {
+            padding-right: 40px;
+        }
+
+        .section-tag {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--color-oro-viejo);
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        .experience h2 {
+            font-family: var(--font-editorial);
+            font-size: 3.2rem;
+            color: var(--color-cacao);
+            line-height: 1.2;
+            font-weight: 400;
+            margin-bottom: 32px;
+        }
+
+        .experience p {
+            font-size: 1.05rem;
+            color: var(--texto-cuerpo);
+            margin-bottom: 24px;
+            font-weight: 300;
+        }
+
+        /* --- VITRINA DE DETALLES --- */
+        .gallery-showcase {
+            padding: 100px 0 100px 0;
+        }
+
+        .showcase-title {
+            text-align: center;
+            font-family: var(--font-editorial);
+            font-size: 2.8rem;
+            color: var(--color-cacao);
+            margin-bottom: 64px;
+            font-weight: 400;
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .showcase-item {
+            background-color: var(--color-blanco);
+            overflow: hidden;
+            border: 1px solid rgba(43, 26, 17, 0.05);
+            transition: transform 0.4s ease;
+        }
+
+        .showcase-item:hover {
+            transform: translateY(-8px);
+        }
+
+        .item-img-box {
+            height: 380px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .item-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .showcase-item:hover .item-img-box img {
+            transform: scale(1.05);
+        }
+
+        .item-desc {
+            padding: 32px;
+            text-align: center;
+        }
+
+        .item-desc h3 {
+            font-family: var(--font-editorial);
+            font-size: 1.6rem;
+            color: var(--color-cacao);
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+
+        .item-desc p {
+            font-size: 0.9rem;
+            color: #7a736d;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- NUEVA SECCIÓN: PORTAFOLIO DE PRODUCTOS (CARRUSEL) --- */
+        .products-section {
+            padding: 120px 0;
+            background-color: var(--color-verde-suave);
+        }
+
+        .products-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .products-header h2 {
+            font-family: var(--font-editorial);
+            font-size: 3rem;
+            color: var(--color-cacao);
+            font-weight: 400;
+            margin-bottom: 12px;
+        }
+
+        .products-header p {
+            font-size: 1.05rem;
+            color: var(--texto-cuerpo);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* Contenedor del Carrusel Flexible */
+        .carousel-container {
+            display: flex;
+            gap: 32px;
+            overflow-x: auto;
+            padding: 20px 4px 40px 4px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: thin;
+            scrollbar-color: var(--color-oro-viejo) transparent;
+        }
+
+        /* Estilizado de barra de scroll para navegadores basados en Webkit */
+        .carousel-container::-webkit-scrollbar {
+            height: 6px;
+        }
+        .carousel-container::-webkit-scrollbar-thumb {
+            background: var(--color-oro-viejo);
+            border-radius: 3px;
+        }
+
+        /* Tarjeta del Producto */
+        .product-card {
+            flex: 0 0 calc(33.333% - 22px);
+            min-width: 290px;
+            background-color: var(--color-blanco);
+            box-shadow: var(--shadow-sutil);
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(43, 26, 17, 0.03);
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 30px 50px rgba(43, 26, 17, 0.08);
+        }
+
+        .product-img-box {
+            height: 320px;
+            width: 100%;
+            overflow: hidden;
+            background-color: var(--color-crema);
+        }
+
+        .product-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-img-box img {
+            transform: scale(1.04);
+        }
+
+        .product-info {
+            padding: 32px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .product-info h3 {
+            font-family: var(--font-editorial);
+            font-size: 1.6rem;
+            color: var(--color-cacao);
+            margin-bottom: 12px;
+            font-weight: 400;
+        }
+
+        .product-info p {
+            font-size: 0.95rem;
+            color: var(--texto-cuerpo);
+            margin-bottom: 24px;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* Botón "Lo quiero" Estilo Minimal */
+        .btn-want {
+            display: block;
+            background-color: transparent;
+            color: var(--color-cacao);
+            border: 1px solid var(--color-cacao);
+            padding: 14px 28px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            margin-top: auto;
+        }
+
+        .btn-want:hover {
+            background-color: var(--color-cacao);
+            color: var(--color-crema);
+        }
+
+        /* Ajustes adaptativos para el carrusel en pantallas medianas y móviles */
+        @media (max-width: 992px) {
+            .product-card {
+                flex: 0 0 calc(50% - 16px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                background: var(--color-crema);
+                padding-top: 140px;
+            }
+            .hero-grid, .editorial-block {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .hero h1 { font-size: 2.8rem; }
+            .hero-image-wrapper { height: auto; }
+            .nav-links { display: none; }
+            
+            .product-card {
+                flex: 0 0 85%;
+            }
+            .products-section {
+                padding: 80px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Menú Minimalista Superior -->
+    <header>
+        <div class="container nav-inner">
+            <a href="#" class="brand">Cacao<span>Támesis</span></a>
+            <ul class="nav-links">
+                <li><a href="#origen">El Origen</a></li>
+                <li><a href="#proceso">El Legado</a></li>
+                <li><a href="#productos">Portafolio</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section Elegante -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <span class="pre-title">Finca Santa Cruz · Cacao de Origen</span>
+                <h1>Sigue viviendo la experiencia del <em>cacao puro</em>.</h1>
+                <p>Nacido en las nieblas de Támesis, Antioquia. Un fruto esculpido por el agua de la montaña y la devoción de manos artesanas que entienden el lujo de lo natural.</p>
+                <a href="#productos" class="btn-gourmet">Haz tu pedido.</a>
+            </div>
+            <div class="hero-image-wrapper">
+                <img src="./tamesino.PNG" alt="Ramón y Claudia - Cacao Támesis" class="hero-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- Historia Editorial: Ramón y Claudia -->
+    <section id="origen" class="experience">
+        <div class="container editorial-block">
+            <div class="img-collage">
+                <img src="./portada-cacao.PNG" alt="Cultivo en Támesis">
+            </div>
+            <div class="story-text">
+                <span class="section-tag">Los Creadores</span>
+                <h2>Ramón & Claudia</h2>
+                <p>Detrás de cada lote exclusivo hay una promesa de respeto por la tierra. Como esposos y artesanos en Támesis, hemos consagrado nuestra vida a rescatar la pureza ancestral del grano de cacao colombiano.</p>
+                <p>Nuestros árboles crecen en armonía con el bosque nativo, logrando una complejidad de matices florales y frutales que solo se manifiesta cuando el fruto se cultiva con amor y dedicación familiar.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vitrina de Calidad -->
+    <section id="proceso" class="gallery-showcase">
+        <div class="container">
+            <h2 class="showcase-title">La Estética de lo Auténtico</h2>
+            <div class="showcase-grid">
+                
+                <div class="showcase-item">
+                    <div class="item-img-box">
+                        <img src="./seleccion-cacao.PNG" alt="Selección Manual">
+                    </div>
+                    <div class="item-desc">
+                        <h3>Cosecha Selectiva</h3>
+                        <p>Solo las mazorcas en su punto exacto de madurez son elegidas a mano.</p>
+                    </div>
+                </div>
+
+                <div class="showcase-item">
+                    <div class="item-img-box">
+                        <img src="./tostado-cacao.PNG" alt="Chocolate Premium">
+                    </div>
+                    <div class="item-desc">
+                        <h3>Tueste Controlado</h3>
+                        <p>Procesos lentos que preservan los aceites esenciales y notas madereras naturales.</p>
+                    </div>
+                </div>
+
+                <div class="showcase-item">
+                    <div class="item-img-box">
+                        <img src="https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&q=80&w=600" alt="Pureza Sostenible">
+                    </div>
+                    <div class="item-desc">
+                        <h3>Origen Único</h3>
+                        <p>Sin mezclas, sin agregados comerciales. El reflejo puro de Támesis.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- NUEVA SECCIÓN: PORTAFOLIO DE PRODUCTOS (CARRUSEL EXCLUSIVO) -->
+    <section id="productos" class="products-section">
+        <div class="container">
+            <div class="products-header">
+                <h2>Nuestra Colección</h2>
+                <p>Ediciones limitadas obtenidas directamente de la última cosecha en la Finca Santa Cruz.</p>
+            </div>
+
+            <!-- Contenedor del Carrusel Scrolleable -->
+            <div class="carousel-container">
+                
+                <!-- Producto 1 -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <!-- Puedes cambiar esta URL por el nombre de tu imagen local, ej. ./barra-70.PNG -->
+                        <img src="https://images.unsplash.com/photo-1548907040-4d42b52115ca?auto=format&fit=crop&q=80&w=600" alt="Chocolate Artesanal 70%">
+                    </div>
+                    <div class="product-info">
+                        <h3>Barra de Autor 70%</h3>
+                        <p>Notas marcadas a frutos rojos y nueces tostadas. Un equilibrio sedoso para paladares exigentes.</p>
+                        <a href="https://wa.me/573001234567?text=Hola%20Ramón%20y%20Claudia,%20quiero%20la%20Barra%20de%20Autor%2070%" target="_blank" class="btn-want">Lo quiero</a>
+                    </div>
+                </div>
+
+                <!-- Producto 2 -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <!-- Puedes cambiar esta URL por el nombre de tu imagen local, ej. ./cacao-polvo.PNG -->
+                        <img src="https://images.unsplash.com/photo-1587132137056-bfbf0166836e?auto=format&fit=crop&q=80&w=600" alt="Cacao Puro en Polvo">
+                    </div>
+                    <div class="product-info">
+                        <h3>Cacao Puro Soluble</h3>
+                        <p>Grano molido en frío libre de azúcares y conservantes. Ideal para revivir mañanas tradicionales.</p>
+                        <a href="https://wa.me/573001234567?text=Hola%20Ramón%20y%20Claudia,%20quiero%20el%20Cacao%20Puro%20Soluble" target="_blank" class="btn-want">Lo quiero</a>
+                    </div>
+                </div>
+
+                <!-- Producto 3 -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <!-- Puedes cambiar esta URL por el nombre de tu imagen local, ej. ./nibs-cacao.PNG -->
+                        <img src="https://images.unsplash.com/photo-1604514288151-51829e79b867?auto=format&fit=crop&q=80&w=600" alt="Nibs de Cacao Fino">
+                    </div>
+                    <div class="product-info">
+                        <h3>Nibs de Cacao Fino</h3>
+                        <p>Pequeños trozos de grano tostado crujiente cargados de antioxidantes y pura energía natural.</p>
+                        <a href="https://wa.me/573001234567?text=Hola%20Ramón%20y%20Claudia,%20quiero%20los%20Nibs%20de%20Cacao%20Fino" target="_blank" class="btn-want">Lo quiero</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Corporativo Boutique -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Cacao Támesis. Ediciones de Lujo Sostenible. Támesis, Suroeste Antioqueño, Colombia.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
