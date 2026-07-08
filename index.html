@@ -323,10 +323,11 @@
             letter-spacing: 0.5px;
         }
 
-        /* --- NUEVA SECCIÓN: PORTAFOLIO DE PRODUCTOS (CARRUSEL) --- */
+        /* --- SECCIÓN: PORTAFOLIO DE PRODUCTOS (CARRUSEL AUTOMÁTICO INTELIGENTE) --- */
         .products-section {
             padding: 120px 0;
             background-color: var(--color-verde-suave);
+            overflow: hidden; /* Evita scrolls raros fuera de la sección */
         }
 
         .products-header {
@@ -350,18 +351,18 @@
             font-weight: 300;
         }
 
-        /* Contenedor del Carrusel Flexible */
+        /* Contenedor del Carrusel Ajustado para Desplazamiento Manual Inteligente */
         .carousel-container {
             display: flex;
             gap: 32px;
             overflow-x: auto;
             padding: 20px 4px 40px 4px;
-            scroll-snap-type: x mandatory;
             scrollbar-width: thin;
             scrollbar-color: var(--color-oro-viejo) transparent;
+            /* Quitamos scroll-snap temporalmente para que la transición automática sea 100% fluida */
+            -webkit-overflow-scrolling: touch;
         }
 
-        /* Estilizado de barra de scroll para navegadores basados en Webkit */
         .carousel-container::-webkit-scrollbar {
             height: 6px;
         }
@@ -376,7 +377,6 @@
             min-width: 290px;
             background-color: var(--color-blanco);
             box-shadow: var(--shadow-sutil);
-            scroll-snap-align: start;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -432,7 +432,6 @@
             line-height: 1.6;
         }
 
-        /* Botón "Lo quiero" Estilo Minimal */
         .btn-want {
             display: block;
             background-color: transparent;
@@ -453,7 +452,7 @@
             color: var(--color-crema);
         }
 
-        /* Ajustes adaptativos para el carrusel en pantallas medianas y móviles */
+        /* Ajustes adaptativos */
         @media (max-width: 992px) {
             .product-card {
                 flex: 0 0 calc(50% - 16px);
@@ -474,7 +473,7 @@
             .nav-links { display: none; }
             
             .product-card {
-                flex: 0 0 85%;
+                flex: 0 0 80%;
             }
             .products-section {
                 padding: 80px 0;
@@ -566,7 +565,7 @@
         </div>
     </section>
 
-    <!-- NUEVA SECCIÓN: PORTAFOLIO DE PRODUCTOS (CARRUSEL EXCLUSIVO) -->
+    <!-- SECCIÓN: PORTAFOLIO DE PRODUCTOS -->
     <section id="productos" class="products-section">
         <div class="container">
             <div class="products-header">
@@ -575,12 +574,11 @@
             </div>
 
             <!-- Contenedor del Carrusel Scrolleable -->
-            <div class="carousel-container">
+            <div class="carousel-container" id="gourmetCarousel">
                 
                 <!-- Producto 1 -->
                 <div class="product-card">
                     <div class="product-img-box">
-                        <!-- Puedes cambiar esta URL por el nombre de tu imagen local, ej. ./barra-70.PNG -->
                         <img src="https://images.unsplash.com/photo-1548907040-4d42b52115ca?auto=format&fit=crop&q=80&w=600" alt="Chocolate Artesanal 70%">
                     </div>
                     <div class="product-info">
@@ -593,7 +591,6 @@
                 <!-- Producto 2 -->
                 <div class="product-card">
                     <div class="product-img-box">
-                        <!-- Puedes cambiar esta URL por el nombre de tu imagen local, ej. ./cacao-polvo.PNG -->
                         <img src="https://images.unsplash.com/photo-1587132137056-bfbf0166836e?auto=format&fit=crop&q=80&w=600" alt="Cacao Puro en Polvo">
                     </div>
                     <div class="product-info">
@@ -606,13 +603,24 @@
                 <!-- Producto 3 -->
                 <div class="product-card">
                     <div class="product-img-box">
-                        <!-- Puedes cambiar esta URL por el nombre de tu imagen local, ej. ./nibs-cacao.PNG -->
                         <img src="https://images.unsplash.com/photo-1604514288151-51829e79b867?auto=format&fit=crop&q=80&w=600" alt="Nibs de Cacao Fino">
                     </div>
                     <div class="product-info">
                         <h3>Nibs de Cacao Fino</h3>
                         <p>Pequeños trozos de grano tostado crujiente cargados de antioxidantes y pura energía natural.</p>
                         <a href="https://wa.me/573001234567?text=Hola%20Ramón%20y%20Claudia,%20quiero%20los%20Nibs%20de%20Cacao%20Fino" target="_blank" class="btn-want">Lo quiero</a>
+                    </div>
+                </div>
+
+                <!-- Producto 4 (Para dar sensación de ciclo al deslizar) -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <img src="https://images.unsplash.com/photo-1548907040-4d42b52115ca?auto=format&fit=crop&q=80&w=600" alt="Chocolate Artesanal 85%">
+                    </div>
+                    <div class="product-info">
+                        <h3>Reserva Especial 85%</h3>
+                        <p>Máxima pureza con sutiles matices madereros y florales del suroeste antioqueño.</p>
+                        <a href="https://wa.me/573001234567?text=Hola%20Ramón%20y%20Claudia,%20quiero%20la%20Reserva%20Especial%2085%" target="_blank" class="btn-want">Lo quiero</a>
                     </div>
                 </div>
 
@@ -626,6 +634,52 @@
             <p>&copy; 2026 Cacao Támesis. Ediciones de Lujo Sostenible. Támesis, Suroeste Antioqueño, Colombia.</p>
         </div>
     </footer>
+
+    <!-- SCRIPT DE DESPLAZAMIENTO INTELIGENTE -->
+    <script>
+        const carousel = document.getElementById('gourmetCarousel');
+        let speed = 1; // Velocidad del avance lento (en píxeles)
+        let scrollInterval;
+        let isUserInteracting = false;
+        let interactionTimeout;
+
+        // Función para mover el carrusel automáticamente de forma infinita
+        function startAutoScroll() {
+            scrollInterval = setInterval(() => {
+                if (!isUserInteracting) {
+                    carousel.scrollLeft += speed;
+                    
+                    // Si llega al final del scroll, regresa suavemente al inicio
+                    if (carousel.scrollLeft >= (carousel.scrollWidth - carousel.clientWidth - 2)) {
+                        carousel.scrollLeft = 0;
+                    }
+                }
+            }, 30); // Frecuencia de actualización suave (en milisegundos)
+        }
+
+        function stopAutoScroll() {
+            clearInterval(scrollInterval);
+        }
+
+        // Detectar interacción del usuario para pausar el movimiento automático temporalmente
+        function handleUserInteraction() {
+            isUserInteracting = true;
+            clearTimeout(interactionTimeout);
+
+            // Si el usuario deja de mover o tocar por 4 segundos, el carrusel vuelve a avanzar solo
+            interactionTimeout = setTimeout(() => {
+                isUserInteracting = false;
+            }, 4000);
+        }
+
+        // Listeners para dar control absoluto al usuario (Scroll manual, mouse o touch)
+        carousel.addEventListener('scroll', handleUserInteraction);
+        carousel.addEventListener('touchstart', handleUserInteraction, {passive: true});
+        carousel.addEventListener('mousedown', handleUserInteraction);
+
+        // Iniciar la experiencia al cargar la página
+        window.addEventListener('load', startAutoScroll);
+    </script>
 
 </body>
 </html>
