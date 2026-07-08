@@ -359,7 +359,9 @@
             padding: 20px 4px 40px 4px;
             scrollbar-width: thin;
             scrollbar-color: var(--color-oro-viejo) transparent;
-            /* Quitamos scroll-snap temporalmente para que la transición automática sea 100% fluida */
+            
+            /* SOLUCIÓN AL CONFLICTO AUTOMÁTICO: Fuerza a que el scroll de este bloque sea instantáneo */
+            scroll-behavior: auto !important; 
             -webkit-overflow-scrolling: touch;
         }
 
@@ -519,7 +521,7 @@
             <div class="story-text">
                 <span class="section-tag">Los Creadores</span>
                 <h2>Ramón & Claudia</h2>
-                <p>Detrás de cada lote exclusivo hay una promesa de respeto por la tierra. Como esposos y artesanos en Támesis, hemos consagrado nuestra vida a rescatar la pureza ancestral del grano de cacao colombiano.</p>
+                <p>Detrás de cada lote exclusivo hay una promise de respeto por la tierra. Como esposos y artesanos en Támesis, hemos consagrado nuestra vida a rescatar la pureza ancestral del grano de cacao colombiano.</p>
                 <p>Nuestros árboles crecen en armonía con el bosque nativo, logrando una complejidad de matices florales y frutales que solo se manifiesta cuando el fruto se cultiva con amor y dedicación familiar.</p>
             </div>
         </div>
@@ -612,7 +614,7 @@
                     </div>
                 </div>
 
-                <!-- Producto 4 (Para dar sensación de ciclo al deslizar) -->
+                <!-- Producto 4 -->
                 <div class="product-card">
                     <div class="product-img-box">
                         <img src="https://images.unsplash.com/photo-1548907040-4d42b52115ca?auto=format&fit=crop&q=80&w=600" alt="Chocolate Artesanal 85%">
@@ -635,50 +637,62 @@
         </div>
     </footer>
 
-    <!-- SCRIPT DE DESPLAZAMIENTO INTELIGENTE -->
+    <!-- SCRIPT DE DESPLAZAMIENTO INTELIGENTE REVISADO -->
     <script>
         const carousel = document.getElementById('gourmetCarousel');
-        let speed = 1; // Velocidad del avance lento (en píxeles)
+        let speed = 1; 
         let scrollInterval;
         let isUserInteracting = false;
         let interactionTimeout;
 
-        // Función para mover el carrusel automáticamente de forma infinita
+        // Clonamos dinámicamente los productos para asegurar que el carrusel sea infinito
+        // sin importar la resolución o tamaño de la pantalla del dispositivo.
+        const originalCards = Array.from(carousel.children);
+        originalCards.forEach(card => {
+            const clone = card.cloneNode(true);
+            carousel.appendChild(clone);
+        });
+
         function startAutoScroll() {
+            // Evitamos duplicar intervalos
+            if (scrollInterval) clearInterval(scrollInterval);
+            
             scrollInterval = setInterval(() => {
                 if (!isUserInteracting) {
                     carousel.scrollLeft += speed;
                     
-                    // Si llega al final del scroll, regresa suavemente al inicio
-                    if (carousel.scrollLeft >= (carousel.scrollWidth - carousel.clientWidth - 2)) {
+                    // Si el scroll llegó a la mitad (donde empiezan los elementos clonados), resetea al inicio de forma invisible
+                    if (carousel.scrollLeft >= carousel.scrollWidth / 2) {
                         carousel.scrollLeft = 0;
                     }
                 }
-            }, 30); // Frecuencia de actualización suave (en milisegundos)
+            }, 25); 
         }
 
-        function stopAutoScroll() {
-            clearInterval(scrollInterval);
-        }
-
-        // Detectar interacción del usuario para pausar el movimiento automático temporalmente
         function handleUserInteraction() {
             isUserInteracting = true;
             clearTimeout(interactionTimeout);
 
-            // Si el usuario deja de mover o tocar por 4 segundos, el carrusel vuelve a avanzar solo
+            // Devuelve el control automático tras 4 segundos de inactividad
             interactionTimeout = setTimeout(() => {
                 isUserInteracting = false;
             }, 4000);
         }
 
-        // Listeners para dar control absoluto al usuario (Scroll manual, mouse o touch)
-        carousel.addEventListener('scroll', handleUserInteraction);
+        // Eventos de interacción
+        carousel.addEventListener('scroll', () => {
+            // Control de seguridad si el usuario retrocede manualmente antes del inicio
+            if (carousel.scrollLeft <= 0) {
+                carousel.scrollLeft = carousel.scrollWidth / 2;
+            }
+            handleUserInteraction();
+        });
+        
         carousel.addEventListener('touchstart', handleUserInteraction, {passive: true});
         carousel.addEventListener('mousedown', handleUserInteraction);
 
-        // Iniciar la experiencia al cargar la página
-        window.addEventListener('load', startAutoScroll);
+        // Activación limpia al cargar la página
+        window.addEventListener('DOMContentLoaded', startAutoScroll);
     </script>
 
 </body>
