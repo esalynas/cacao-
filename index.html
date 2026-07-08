@@ -96,22 +96,28 @@
             color: var(--color-oro-viejo);
         }
 
-        /* --- HERO: CORTE EDITORIAL LUXURY --- */
+        /* --- HERO: CONFIGURADO PARA TU NUEVA IMAGEN --- */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding-top: 120px;
-            background: linear-gradient(to right, var(--color-crema) 60%, var(--color-verde-suave) 40%);
+            padding-top: 100px;
+            background: linear-gradient(to right, var(--color-crema) 55%, var(--color-verde-suave) 45%);
             position: relative;
         }
 
         .hero-grid {
             display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 64px;
+            grid-template-columns: 1fr;
+            gap: 48px;
             align-items: center;
             width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .hero-grid {
+                grid-template-columns: 1.1fr 0.9fr;
+            }
         }
 
         .hero-content {
@@ -161,7 +167,7 @@
             font-weight: 500;
             letter-spacing: 2px;
             text-transform: uppercase;
-            border-radius: 0px; /* Bordes rectos tipo editorial */
+            border-radius: 0px;
             box-shadow: 0 10px 30px rgba(43, 26, 17, 0.15);
             transition: all 0.4s ease;
             border: 1px solid var(--color-cacao);
@@ -173,19 +179,27 @@
             transform: translateY(-3px);
         }
 
-        /* Imagen Principal Estilo Revista */
+        /* Contenedor optimizado para resaltar tu foto sin recortarla toscamente */
         .hero-image-wrapper {
             position: relative;
-            height: 600px;
             width: 100%;
-            box-shadow: var(--shadow-sutil);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .hero-img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: sepia(10%) contrast(102%);
+            max-width: 480px;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 30px 60px rgba(43, 26, 17, 0.1);
+            background-color: var(--color-blanco); /* Protege el fondo blanco de tu ilustración */
+            transition: transform 0.4s ease;
+        }
+
+        .hero-img:hover {
+            transform: scale(1.02);
         }
 
         /* --- SECCIÓN HISTORIA: ROMANCE POR EL ORIGEN --- */
@@ -210,6 +224,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border-radius: 4px;
         }
 
         .story-text {
@@ -343,7 +358,7 @@
             font-weight: 300;
         }
 
-        /* Formulario Limpio, sin ruido visual */
+        /* Formulario Limpio */
         .form-luxury {
             max-width: 500px;
             margin: 0 auto;
@@ -416,9 +431,9 @@
                 gap: 40px;
             }
             .hero h1 { font-size: 2.8rem; }
-            .hero-image-wrapper, .img-collage { height: 400px; }
+            .hero-image-wrapper { height: auto; }
             .cta-wrapper { padding: 40px 24px; }
-            .nav-links { display: none; } /* Enfoque puramente minimalista en móviles */
+            .nav-links { display: none; }
         }
     </style>
 </head>
@@ -436,7 +451,7 @@
         </div>
     </header>
 
-    <!-- Hero Section Elegante -->
+    <!-- Hero Section Elegante con TU nueva imagen -->
     <section class="hero">
         <div class="container hero-grid">
             <div class="hero-content">
@@ -446,8 +461,8 @@
                 <a href="#experiencia" class="btn-gourmet">Solicitar Catálogo Privado</a>
             </div>
             <div class="hero-image-wrapper">
-                <!-- Imagen de alta calidad: Granos de cacao reales y refinados -->
-                <img src="https://images.unsplash.com/photo-1587132137056-bfbf0166836e?auto=format&fit=crop&q=80&w=800" alt="Cacao Premium Orgánico" class="hero-img">
+                <!-- Aquí se vincula tu imagen cargada. Asegúrate de guardarla con este nombre exacto en tu repositorio -->
+                <img src="portada-cacao.png" alt="Ramón y Claudia - Cacao Támesis" class="hero-img">
             </div>
         </div>
     </section>
@@ -456,14 +471,14 @@
     <section id="origen" class="experience">
         <div class="container editorial-block">
             <div class="img-collage">
-                <!-- Imagen de alta calidad: Planta de cacao fresca en la naturaleza -->
+                <!-- Imagen complementaria de alta calidad para mantener la atmósfera natural -->
                 <img src="https://images.unsplash.com/photo-1629963216853-bc2cfc8bd4fc?auto=format&fit=crop&q=80&w=800" alt="Cultivo en Támesis">
             </div>
             <div class="story-text">
                 <span class="section-tag">Los Creadores</span>
                 <h2>Ramón & Claudia</h2>
-                <p>Detrás de cada lote exclusivo hay una promesa de respeto por la tierra. Como esposos y artesanos de la tierra en Támesis, hemos consagrado nuestra vida a rescatar la pureza ancestral del grano colombiano.</p>
-                <p>Nuestros árboles crecen en armonía con el bosque nativo, logrando una complejidad de matices florales y frutales que solo se manifiesta cuando el cacao es amado desde su raíz.</p>
+                <p>Detrás de cada lote exclusivo hay una promesa de respeto por la tierra. Como esposos y artesanos en Támesis, hemos consagrado nuestra vida a rescatar la pureza ancestral del grano de cacao colombiano.</p>
+                <p>Nuestros árboles crecen en armonía con el bosque nativo, logrando una complejidad de matices florales y frutales que solo se manifiesta cuando el fruto se cultiva con amor y dedicación familiar.</p>
             </div>
         </div>
     </section>
@@ -512,7 +527,7 @@
     <section id="experiencia" class="cta-luxury">
         <div class="container">
             <div class="cta-wrapper">
-                <h2>Se parte del Club de Selección</h2>
+                <h2>Sé parte del Club de Selección</h2>
                 <p>Deje sus detalles para recibir invitaciones a cosechas limitadas, ediciones de autor y contacto personalizado por WhatsApp de Ramón y Claudia.</p>
                 
                 <form id="luxuryForm" onsubmit="handleGourmetSubmit(event)" class="form-luxury">
@@ -552,7 +567,7 @@
             
             console.log("Alta de Cliente Premium Registrada:", { nombre, telefono });
 
-            // Animación elegante de desvanecimiento
+            // Transición limpia de UI
             document.getElementById('luxuryForm').style.display = 'none';
             const success = document.getElementById('luxurySuccess');
             success.style.display = 'block';
